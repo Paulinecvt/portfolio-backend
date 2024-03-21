@@ -8,8 +8,19 @@ require("./db");
 // Handles http requests (express is node js framework)
 // https://www.npmjs.com/package/express
 const express = require("express");
-
 const app = express();
+
+// CORS 
+const cors = require("cors");
+app.set("trust proxy", 1);
+app.use(
+  cors({
+    origin: ["http://localhost:5173"],
+  })
+);
+
+app.use(logger('dev'));
+app.use(express.static('public'));
 
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
