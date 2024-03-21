@@ -14,11 +14,19 @@ const app = express();
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
 
-// 👇 Start handling routes here
+// Index
 const indexRoutes = require("./routes/index.routes");
 app.use("/api", indexRoutes);
+// Design
+const designRoutes = require("./routes/Design.routes");
+app.use("/design", designRoutes);
+// Web
+const webRoutes = require("./routes/Web.routes");
+app.use("/web", webRoutes);
 
-// ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
+// Error handling
 require("./error-handling")(app);
+
+
 
 module.exports = app;
